@@ -12,7 +12,8 @@ defmodule FwRpi do
   @wlan_psk Application.get_env(:fw_rpi, :psk)
 
   def start(_type, _args) do
-    start_wifi()
+    # start_wifi()
+    start_eth()#while using rpi1
     network_time()
     :dnssd.register("Brewberry π", "_http._tcp", 80)
     {:ok, self()}
@@ -24,6 +25,12 @@ defmodule FwRpi do
       ssid: @wlan_ssid,
       key_mgmt: @wlan_key_mgmt,
       psk: @wlan_psk
+  end
+
+  @spec start_eth() :: :ok
+  def start_eth do
+    # Configure a network that supplies IP addresses via DHCP
+    Nerves.Network.setup "eth0", ipv4_address_method: :dhcp
   end
 
   def network_time do
