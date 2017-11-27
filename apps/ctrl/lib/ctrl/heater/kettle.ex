@@ -1,23 +1,24 @@
 defmodule Ctrl.Heater.Kettle do
   @moduledoc "The kettle."
+  alias ElixirALE.GPIO
   @behaviour Ctrl.Heater
 
   @pin 17
-
+  @heater nil
   alias Ctrl.Rpi.Gpio
 
   def init do
-    Gpio.output_pin @pin
+    @heater = GPIO.start_link(@pin, :output)
     {:ok, nil}
   end
 
   def handle_update(_heater, :heating) do
-    Gpio.set_pin @pin, :on
+    GPIO.write(@header, 1)
     :on
   end
 
   def handle_update(_heater, _mode) do
-    Gpio.set_pin @pin, :off
+    GPIO.write(@heater, 0)
     :off
   end
 

@@ -24,3 +24,5 @@ erl_crash.dump
 *.ipr
 
 apps/fw_rpi/config/wifi.exs
+
+.elixir_ls

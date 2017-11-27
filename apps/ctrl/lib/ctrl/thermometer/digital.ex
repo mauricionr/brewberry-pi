@@ -2,10 +2,10 @@ defmodule Ctrl.Thermometer.Digital do
   @moduledoc "DS18B20 thermometer, mounted on pin 17."
   @behaviour Ctrl.Thermometer
 
-  alias Ctrl.Rpi.W1
+  alias ElixirALE.GPIO
 
-  def init, do: {:ok, W1.sensor}
+  def init, do: {:ok, GPIO.read}
 
-  def handle_read(sensor), do: W1.read sensor
+  def handle_read(sensor), do: GPIO.read(sensor)
 
 end

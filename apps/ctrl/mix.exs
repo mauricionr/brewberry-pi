@@ -20,6 +20,6 @@ defmodule Ctrl.Mixfile do
   end
 
   defp deps do
-    []
+    [{:elixir_ale, "~> 1.0.1"}]
   end
 end
